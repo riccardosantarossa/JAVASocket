@@ -13,8 +13,13 @@ public class DemoServer {
 	
 	public static void main(String[] args) {
 		// Demo Server TCP
+		
 		BufferedReader in = null;
 		PrintWriter out = null;
+		
+		while(true)
+		{
+		
 		try {
 			// Welcoming Socket (per 3-way handshake)
 			ws = new ServerSocket(7979);
@@ -33,13 +38,15 @@ public class DemoServer {
 		try {
 			//in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			out = new PrintWriter(s.getOutputStream(), true);
-			out.println("Che supersballo!");
+			out.println("Benvenuto nel server di Riccardo Santarossa");
 			System.out.println("remote host: "+s.getInetAddress());
 		} catch (IOException e) {			
 			e.printStackTrace();
 			System.out.println("Unable to get I/O stream on socket!");
 		}
+		
 		System.out.println("Quitting server!");
+		
 		
 		/*
 		try {
@@ -70,7 +77,7 @@ public class DemoServer {
 			e.printStackTrace();
 			System.out.println("Error closing socket!");
 		}
-		
+		}
 
 	}  // fine main
 
