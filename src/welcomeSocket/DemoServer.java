@@ -25,8 +25,8 @@ public class DemoServer {
 		Date d = new Date();
 		
 		//Formato della data configurabile con DATEFORMAT
-		/*DateFormat formatoData = DateFormat.getDateInstance(DateFormat.LONG, Locale.ITALY);
-		String data = formatoData.format(d);*/
+		DateFormat formatoData = DateFormat.getDateInstance(DateFormat.LONG, Locale.ITALY);
+		String data = formatoData.format(d);
 		
 		while(true)
 		{
@@ -70,8 +70,8 @@ public class DemoServer {
 			if(str.equals("data"))
 			{
 				//Scelgo se stampare data semplice o più complessa 
-				out.println(new Date().toString());
-				//out.println(data);
+				//out.println(new Date().toString());
+				out.println(data);
 			}
 			//out.println(str); // ECHO
 			System.out.println(str);  // DEBUG
