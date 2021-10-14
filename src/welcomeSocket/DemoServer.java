@@ -24,8 +24,9 @@ public class DemoServer {
 		PrintWriter out = null;
 		Date d = new Date();
 		
-		DateFormat formatoData = DateFormat.getDateInstance(DateFormat.FULL, Locale.ITALY);
-		String data = formatoData.format(d);
+		//Formato della data configurabile con DATEFORMAT
+		/*DateFormat formatoData = DateFormat.getDateInstance(DateFormat.LONG, Locale.ITALY);
+		String data = formatoData.format(d);*/
 		
 		while(true)
 		{
@@ -67,7 +68,11 @@ public class DemoServer {
 			// Per leggere da socket:
 			String str = in.readLine();
 			if(str.equals("data"))
-				out.println(data);
+			{
+				//Scelgo se stampare data semplice o più complessa 
+				out.println(new Date().toString());
+				//out.println(data);
+			}
 			//out.println(str); // ECHO
 			System.out.println(str);  // DEBUG
 			
