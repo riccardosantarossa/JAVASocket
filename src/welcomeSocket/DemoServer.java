@@ -1,10 +1,16 @@
+
+//SANTAROSSA RICCARDO 5BIA 08/10/2021
+
 package welcomeSocket;
 
 import java.net.*;
+import java.text.DateFormat;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.Locale;
 
 public class DemoServer {
 
@@ -16,63 +22,73 @@ public class DemoServer {
 		
 		BufferedReader in = null;
 		PrintWriter out = null;
+		Date d = new Date();
+		
+		DateFormat formatoData = DateFormat.getDateInstance(DateFormat.FULL, Locale.ITALY);
+		String data = formatoData.format(d);
 		
 		while(true)
 		{
-		
-		try {
+		try 
+		{
 			// Welcoming Socket (per 3-way handshake)
 			ws = new ServerSocket(7979);
-		} catch (IOException e) {			
+		} 
+		catch (IOException e) {			
 			e.printStackTrace();
 			System.out.println("Welcoming socket error!");
 		}
 		
-		try {
+		try 
+		{
 			s = ws.accept();  // create connection socket
-		} catch (IOException e) {			
+		} 
+		catch (IOException e) {			
 			e.printStackTrace();
 			System.out.println("Connection Accept error!");
 		}
 		
-		try {
-			//in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+		try 
+		{
+			in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			out = new PrintWriter(s.getOutputStream(), true);
 			out.println("Benvenuto nel server di Riccardo Santarossa");
 			System.out.println("remote host: "+s.getInetAddress());
-		} catch (IOException e) {			
+		} 
+		catch (IOException e) 
+		{			
 			e.printStackTrace();
 			System.out.println("Unable to get I/O stream on socket!");
 		}
 		
-		System.out.println("Quitting server!");
-		
-		
-		/*
 		try {
-			out.println("Benvenuto in KeSuperSballo.Yeah.Ok!");
+			//out.println("Benvenuto in KeSuperSballo.Yeah.Ok!");
 			
 			// Per leggere da socket:
 			String str = in.readLine();
-			out.println(str); // ECHO
+			if(str.equals("data"))
+				out.println(data);
+			//out.println(str); // ECHO
 			System.out.println(str);  // DEBUG
 			
 			// Per scrivere su socket:
-			out.println("Arrivederci, e' stato un piacere!");
-			
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			out.println("Arrivederci, e' stato un piacere!");	
+		} 
+		catch (IOException e) 
+		{
 			e.printStackTrace();
 			System.out.println("Communication Error!");
-		} */
+		} 
 		
-		try {
+		try 
+		{
 			//in.close();
 			out.close();  // close PrintWriter
 			s.close();    // close connection socket
-			ws.close();   // close welcoming socket
-		} catch (IOException e) {
+			//ws.close();   // close welcoming socket
+		} 
+		catch (IOException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Error closing socket!");
