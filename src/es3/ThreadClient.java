@@ -16,11 +16,13 @@ import java.util.Locale;
 public class ThreadClient implements Runnable {
 
 	private static Socket s = null;			// connection socket
+	private static ServerSocket ws = null;
 	public static boolean chiudiServer=true;
 	
-	public ThreadClient(Socket s)
+	public ThreadClient(Socket s, ServerSocket ws)
 	{
 		this.s = s;
+		this.ws = ws;
 	}
 	
 	@Override
@@ -66,7 +68,7 @@ public class ThreadClient implements Runnable {
 				str.toLowerCase();
 				if(str.equals("data"))
 				{
-					//Scelgo se stampare data semplice o più complessa 
+					//Scelgo se stampare data semplice o piï¿½ complessa 
 					//out.println(new Date().toString());
 					out.println(data);
 				}
@@ -100,6 +102,7 @@ public class ThreadClient implements Runnable {
 					in.close();
 					out.close();  // close PrintWriter
 					s.close();    // close connection socket
+					//ws.close();
 				} 
 				catch (IOException e) 
 				{
@@ -112,8 +115,7 @@ public class ThreadClient implements Runnable {
 				try 
 				{
 					out.close();  // close PrintWriter
-					s.close();    // close connection socket
-					
+					s.close();    // close connection socket	
 				} 
 				catch (IOException e) 
 				{

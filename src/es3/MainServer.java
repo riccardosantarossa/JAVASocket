@@ -32,7 +32,7 @@ public class MainServer
 			try 
 			{
 				Socket s = ws.accept();
-				ThreadClient c= new ThreadClient(s);
+				ThreadClient c= new ThreadClient(s,ws);
 				Thread t = new Thread(c);
 				t.start();
 			} catch (IOException e) 
@@ -43,14 +43,14 @@ public class MainServer
 				 
 		}
 		
-		try 
+		/*try 
 		{
 			ws.close();
 		} catch (IOException e) 
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	
