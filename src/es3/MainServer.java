@@ -57,7 +57,8 @@ public class MainServer
 	
 	public static void ChiudiServer()
 	{
-		try {
+		try 
+		{
 			ws.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
