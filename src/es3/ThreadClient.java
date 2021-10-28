@@ -11,13 +11,14 @@ import java.net.Socket;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.Semaphore;
 
 
 public class ThreadClient implements Runnable {
 
 	private Socket s = null;			// connection socket
-	public static boolean chiudiServer=true;
-	
+	Semaphore spegni = new Semaphore(1);
+
 	public ThreadClient(Socket s)
 	{
 		this.s = s;
@@ -46,7 +47,7 @@ public class ThreadClient implements Runnable {
 		
 		String str = null;
 		
-			while(true)
+			while(MainServer.chiusura)
 			{	
 				
 				//Formato della data configurabile con DATEFORMAT
@@ -73,7 +74,13 @@ public class ThreadClient implements Runnable {
 						}
 						else if(str.equals("shutdown"))
 						{
-							MainServer.ChiudiServer();
+							//MainServer.ChiudiServer();
+							try {spegni.acquire();} 
+							catch (InterruptedException e){e.printStackTrace();}
+							
+							MainServer.chiusura=false;
+
+							spegni.release();
 						}
 						else
 						{

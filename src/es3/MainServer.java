@@ -10,21 +10,27 @@ import java.net.SocketException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 //SANTAROSSA RICCARDO 5BIA 21/10/2021
 
 public class MainServer 
 {
 	private static ServerSocket ws = null; // welcoming socket
-	private static boolean chiusura = true;
+	public static boolean chiusura = true;
 	
 	public static void main(String[] args) 
 	{
 		
-		try {
+		ExecutorService pool = Executors.newFixedThreadPool(3);
+
+		try 
+		{
 			ws = new ServerSocket(7979);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+		} 
+		catch (IOException e1) 
+		{
 			e1.printStackTrace();
 			System.out.println("Errore nel welcoming socket");
 		}
@@ -35,9 +41,10 @@ public class MainServer
 			try 
 			{
 				s = ws.accept();
-				ThreadClient c= new ThreadClient(s);
+				/*ThreadClient c= new ThreadClient(s);
 				Thread t = new Thread(c);
-				t.start();
+				t.start();*/
+				pool.execute(new ThreadClient(s));
 			} 
 			
 			catch(SocketException e)
@@ -53,6 +60,7 @@ public class MainServer
 				 
 		}
 		
+		ChiudiServer();
 	}
 	
 	public static void ChiudiServer()
