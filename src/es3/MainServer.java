@@ -19,11 +19,10 @@ public class MainServer
 {
 	private static ServerSocket ws = null; // welcoming socket
 	public static boolean chiusura = true;
+	public static ExecutorService pool = Executors.newFixedThreadPool(3);
 	
 	public static void main(String[] args) 
 	{
-		
-		ExecutorService pool = Executors.newFixedThreadPool(3);
 
 		try 
 		{
@@ -54,7 +53,6 @@ public class MainServer
 			
 			catch (IOException e) 
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 				 
@@ -68,6 +66,7 @@ public class MainServer
 		try 
 		{
 			ws.close();
+			pool.shutdownNow();
 		}
 	
 		catch(SocketException e)
