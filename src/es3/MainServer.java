@@ -58,7 +58,6 @@ public class MainServer
 				 
 		}
 		
-		ChiudiServer();
 	}
 	
 	public static void ChiudiServer()

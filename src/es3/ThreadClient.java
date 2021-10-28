@@ -17,8 +17,7 @@ import java.util.concurrent.Semaphore;
 public class ThreadClient implements Runnable {
 
 	private Socket s = null;			// connection socket
-	Semaphore spegni = new Semaphore(1);
-
+	
 	public ThreadClient(Socket s)
 	{
 		this.s = s;
@@ -74,13 +73,7 @@ public class ThreadClient implements Runnable {
 						}
 						else if(str.equals("shutdown"))
 						{
-							//MainServer.ChiudiServer();
-							try {spegni.acquire();} 
-							catch (InterruptedException e){e.printStackTrace();}
-							
-							MainServer.chiusura=false;
-
-							spegni.release();
+							MainServer.ChiudiServer();
 						}
 						else
 						{
