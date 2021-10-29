@@ -15,7 +15,8 @@ import java.util.Locale;
 import java.util.concurrent.Semaphore;
 
 
-public class ThreadClient implements Runnable {
+public class ThreadClient implements Runnable 
+{
 
 	private Socket s = null;			// connection socket
 	
@@ -31,9 +32,6 @@ public class ThreadClient implements Runnable {
 		PrintWriter out = null;
 		Date d = new Date();
 		
-		try {s.setSoTimeout(1000);} 
-		catch (SocketException e1) {e1.getMessage();}
-
 		try 
 		{
 			in = new BufferedReader(new InputStreamReader(s.getInputStream()));
