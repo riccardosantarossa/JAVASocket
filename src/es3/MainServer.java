@@ -23,7 +23,6 @@ public class MainServer
 	
 	public static void main(String[] args) 
 	{
-
 		try 
 		{
 			ws = new ServerSocket(7979);
@@ -54,10 +53,8 @@ public class MainServer
 			catch (IOException e) 
 			{
 				e.printStackTrace();
-			}
-				 
+			}		 
 		}
-		
 	}
 	
 	public static void ChiudiServer()
@@ -79,7 +76,6 @@ public class MainServer
 			e.printStackTrace();
 		}
 	}
-	
 	
 	
 	

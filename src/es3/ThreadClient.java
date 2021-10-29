@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -30,6 +31,9 @@ public class ThreadClient implements Runnable {
 		PrintWriter out = null;
 		Date d = new Date();
 		
+		try {s.setSoTimeout(1000);} 
+		catch (SocketException e1) {e1.getMessage();}
+
 		try 
 		{
 			in = new BufferedReader(new InputStreamReader(s.getInputStream()));
@@ -48,12 +52,13 @@ public class ThreadClient implements Runnable {
 		
 			while(MainServer.chiusura)
 			{	
-				
 				//Formato della data configurabile con DATEFORMAT
 				DateFormat formatoData = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.ITALY);
 				String data = formatoData.format(d);
 				
-					try {
+					try 
+					{
+						
 						//out.println("Benvenuto in KeSuperSballo.Yeah.Ok!");
 						
 						// Per leggere da socket:
